@@ -1,4 +1,5 @@
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 // Task: Check if current test is implemented correctly and what will be the result of current run?
 public class test2 {
     private ElementsCollection taskListCollection = $$(By.xpath("//tr[@data xpath='table item']"));
-    private Link sortAscLink = $(By.xpath("//th[@data xpath='tableHeadCell sort']"));
+    private SelenideElement sortAscLink = $(By.xpath("//th[@data xpath='tableHeadCell sort']"));
     private List<Task> listTasks = new ArrayList<>();
 
     @Test
