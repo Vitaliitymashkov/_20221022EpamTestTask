@@ -84,7 +84,7 @@ public class test1 {
                 List.of(
                         new Author("Vasyl Kravchuk", new Date(1900, 10, 10)),
                         new Author("Mable Pidruchko", new Date(2000, 10, 10)),
-                        new Author("Galyna Yanchenko", new Date(1950, 1, 1))));
+                        new Author("Galyna Yanchenko", new Date(1950, 1, 1)))));
         bookList.add(new Book("Practice on Grammar", new Date(), 270,
                 List.of(
                         new Author("Biduk T.T.", new Date(2010, 10, 10)))));
@@ -92,7 +92,10 @@ public class test1 {
                 List.of(
                         new Author("Jack B. Stradox", new Date(2020, 2, 2)))));
 
-
+        //Solution:
+        bookList.stream().filter(book -> book.getPageCount() > 150).forEach(book -> {
+            System.out.println(book.getName());
+        });
 
     }
 }
