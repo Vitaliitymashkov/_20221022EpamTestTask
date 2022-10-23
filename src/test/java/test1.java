@@ -4,7 +4,7 @@ import java.util.List;
 
 public class test1 {
 
-    public class Author {
+    public static class Author {
         private String fullName;
         private Date BirthDate;
 
@@ -30,7 +30,7 @@ public class test1 {
         }
     }
 
-    public class Book {
+    public static class Book {
         private String name;
         private Date creationDate;
         private int pageCount;
@@ -80,9 +80,19 @@ public class test1 {
         //Task: find books with page count > 150. Print Books Names and Authors full names at all these books.
 
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("Algebra. Book", new Date(), 221, List.of(new Author("Vasyl Kravchuk"), new Author("Mable Pidruchko"), new Author("Galyna Yanchenko")));
-        bookList.add(new Book("Practice on Grammar", new Date(), 270, List.of(new Author("Biduk T.T.")));
-        bookList.add(new Book("Cafe on Unity", new Date(), 150, List.of(new Author("Jack B. Stradox")));
+        bookList.add(new Book("Algebra. Book", new Date(), 221,
+                List.of(
+                        new Author("Vasyl Kravchuk", new Date(1900, 10, 10)),
+                        new Author("Mable Pidruchko", new Date(2000, 10, 10)),
+                        new Author("Galyna Yanchenko", new Date(1950, 1, 1))));
+        bookList.add(new Book("Practice on Grammar", new Date(), 270,
+                List.of(
+                        new Author("Biduk T.T.", new Date(2010, 10, 10)))));
+        bookList.add(new Book("Cafe on Unity", new Date(), 150,
+                List.of(
+                        new Author("Jack B. Stradox", new Date(2020, 2, 2)))));
+
+
 
     }
 }
