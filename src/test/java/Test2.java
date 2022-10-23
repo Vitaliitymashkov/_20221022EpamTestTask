@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Test2 {
         taskListCollection.forEach(task -> {
             allTasksList.add(new Task(
                     task.$x("./*").getAttribute("name"),
-                    task.$x("./*").getAttribute("endTime")));
+                    new Date(task.$x("./*").getAttribute("endTime"))));
 
             List<Task> list1 = allTasksList;
             List<Task> list2 = allTasksList;
@@ -44,9 +45,9 @@ public class Test2 {
 
     private class Task {
         private String name;
-        private String endTime;
+        private Date endTime;
 
-        public Task(String name, String endTime) {
+        public Task(String name, Date endTime) {
             this.name = name;
             this.endTime = endTime;
         }
@@ -55,7 +56,7 @@ public class Test2 {
             return name;
         }
 
-        public String getEndTime() {
+        public Date getEndTime() {
             return endTime;
         }
     }
