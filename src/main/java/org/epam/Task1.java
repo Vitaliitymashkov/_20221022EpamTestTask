@@ -3,28 +3,48 @@ package org.epam;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 //Task: find books with page count > 150. Print Books Names and Authors full names at all these books.
 public class Task1 {
 
     public static void main(String[] args) {
-        List<Book> books = setBooksData();
+        List<Book> books = prepareInitialBooksData();
 
         //Solution:
-        System.out.println("SOLUTION");
+        System.out.println("SOLUTION 1");
         books.stream().filter(book -> book.getPageCount() > 150)
-                .forEach(Task1::concatBookNameAndAuthorsFullNames);
-    }
-    private static void concatBookNameAndAuthorsFullNames(Book book) {
-        System.out.println(String.format("Book name: '%s'; Authors [%s]",
-                book.getName(),
-                book.getAuthorsList().stream()
-                        .map(author -> author.getFullName() + ", ")
-                        .reduce("", String::concat)
-                        .replaceFirst("(, )$", "")));
+                .forEach(book -> {
+                    System.out.printf("Book name: '%s'; Authors [%s]%n",
+                            book.getName(),
+                            book.getAuthorsList().stream()
+                                    .map(author -> author.getFullName() + ", ")
+                                    .reduce("", String::concat)
+                                    .replaceFirst("(, )$", ""));
+                });
+
+        System.out.println("SOLUTION 2");
+        books.stream().filter(book -> book.getPageCount() > 150)
+                .forEach(book -> {
+                    System.out.println(String.format("Book name: '%s'; Authors [%s]",
+                            book.getName(),
+                            book.getAuthorsList().stream()
+                                    .flatMap(author -> Stream.of(author.getFullName() + ", "))
+                                    .reduce("", String::concat)
+                                    .replaceFirst("(, )$", "")));
+
+                });
+
+        System.out.println("NOT SOLUTION 3 (just gets Authors Full Names)");
+        books.stream().filter(book -> book.getPageCount() > 150)
+                .flatMap(book ->
+                        book.getAuthorsList().stream()
+                                .flatMap(author -> Stream.of(author.getFullName())))
+                .toList()
+                .forEach(System.out::println);
     }
 
-    private static List<Book> setBooksData() {
+    private static List<Book> prepareInitialBooksData() {
         List<Book> books = new ArrayList<>();
         books.add(new Book("Algebra. Book", new Date(), 221,
                 List.of(
@@ -44,6 +64,7 @@ public class Task1 {
 
         private String fullName;
         private Date BirthDate;
+
         public Author(String fullName, Date birthDate) {
             this.fullName = fullName;
             BirthDate = birthDate;
@@ -73,6 +94,7 @@ public class Task1 {
         private Date creationDate;
         private int pageCount;
         private List<Author> authorsList;
+
         public Book(String name, Date creationDate, int pageCount, List<Author> authorsList) {
             this.name = name;
             this.creationDate = creationDate;
