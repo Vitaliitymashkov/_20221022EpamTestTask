@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // Input:  Web Page with table contains a task name, task creation date. Table has sorting on creation date
 // Task: Check if current test is implemented correctly and what will be the result of current run?
-public class test2 {
+public class Test2 {
     private ElementsCollection taskListCollection = $$(By.xpath("//tr[@data xpath='table item']"));
     private SelenideElement sortAscLink = $(By.xpath("//th[@data xpath='tableHeadCell sort']"));
     private List<Task> listTasks = new ArrayList<>();
